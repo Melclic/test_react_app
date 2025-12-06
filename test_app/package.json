@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "smiles-drawer": "^2.1.7"
+    "smiles-drawer": "https://github.com/reymond-group/smilesDrawer/archive/refs/tags/v2.2.0.tar.gz"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

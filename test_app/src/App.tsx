@@ -1,40 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { SmilesCanvas } from "./smilesCanvas";
 import './App.css'
+import { SmilesCanvas } from "./smilesCanvas";
+import { SmilesSVG } from "./smilesSVG";
+import { SimpleSVG } from "./simpleSVG";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <div style={{ padding: 20 }}>
-        <h2>Glucose</h2>
+      <div style={{ padding: 24 }}>
+        <h2>SmilesDrawer test</h2>
         <SmilesCanvas smiles="C(C1C(C(C(C(O1)O)O)O)O)O" />
       </div>
+      <div style={{ padding: 24 }}>
+        <h2>SmilesDrawer SVG test</h2>
+        <SmilesSVG smiles="C(C1C(C(C(C(O1)O)O)O)O)O" />
+      </div>
+      <div style={{ padding: 24 }}>
+        <h1>SVG with React and TypeScript</h1>
+      <SimpleSVG />
+    </div>
     </>
-  )
+
+  );
 }
 
 export default App

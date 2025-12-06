@@ -1,3 +1,4 @@
+// SmilesCanvas.tsx
 import { useEffect, useRef } from "react";
 import SmilesDrawer from "smiles-drawer";
 
@@ -12,10 +13,16 @@ export function SmilesCanvas({
   width = 300,
   height = 200
 }: SmilesCanvasProps) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // Generate a stable unique id for this canvas
+  const idRef = useRef(
+    "smiles_canvas_" + Math.random().toString(36).slice(2)
+  );
 
   useEffect(() => {
-    if (!canvasRef.current || !smiles) return;
+    if (!smiles) return;
+
+    // Optional but fine if you want default themes applied
+    // SmilesDrawer.apply();
 
     const drawer = new SmilesDrawer.Drawer({
       width,
@@ -23,21 +30,29 @@ export function SmilesCanvas({
       explicitHydrogens: false
     });
 
-    const ctx = canvasRef.current.getContext("2d");
+    // Clear any previous drawing
+    const canvas = document.getElementById(
+      idRef.current
+    ) as HTMLCanvasElement | null;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
     if (ctx) {
       ctx.clearRect(0, 0, width, height);
     }
 
+    // Important part
+    // Use the canvas id string, not the element
     SmilesDrawer.parse(
       smiles,
-      tree => {
-        drawer.draw(tree, canvasRef.current!, "light", false);
+      (      tree: any) => {
+        drawer.draw(tree, idRef.current, "light", false);
       },
-      error => {
+      (      error: any) => {
         console.error("Smiles parse error:", error);
       }
     );
   }, [smiles, width, height]);
 
-  return <canvas ref={canvasRef} width={width} height={height} />;
+  return <canvas id={idRef.current} width={width} height={height} />;
 }
