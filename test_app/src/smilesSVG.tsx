@@ -13,7 +13,8 @@ export function SmilesSVG({
   width = 300,
   height = 200
 }: SmilesSVGProps) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  //const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
     if (!smiles) return;
@@ -40,5 +41,13 @@ export function SmilesSVG({
     );
   }, [smiles, width, height]);
 
-  return <div ref={containerRef} style={{ width, height }} />;
+  return (
+    <svg
+      ref={containerRef}
+      data-smiles={smiles}
+      width={width}
+      height={height}
+      style={{ display: "block" }}
+    />
+  );
 }
